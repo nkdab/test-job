@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.css"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Контрагент</a>
+    </nav>
+    <div class="container-fluid">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#company-card" data-link="ajax">
+                Карточка компании
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#registr-data" data-link="ajax">
+                Регистрационные данные
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#okved-list" data-link="ajax">
+                Виды деятельности
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#phones-list" data-link="ajax">
+                Телефоны
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div id="app" class="mt-5 pt-5"></div>
+      </main>
+    </div>
+
+    <!-- vendor scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://unpkg.com/@popperjs/core@2"
+      type="text/javascript"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-deparam@0.5.3/jquery-deparam.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.6/jsrender.js"></script>
+    <!-- app scripts -->
+    <script>
+      (function () {
+        let info; // Храним полученные данные
+
+        //Получаем данные, грузим карточку компании
+        function init() {
+          const loader = `
+          <div class="d-flex flex-column justify-content-center align-items-center">
+            <div class="spinner-border text-primary" role="status">
+               <span class="sr-only">Loading...</span>
+            </div>
+          </div>`;
+          $('#app').html(loader);
+          $.getJSON('test.json')
+            .done((companyData) => {
+              info = companyData.Data.Report;
+              const page = window.location.hash.replace('#', '');
+              renderPage(page);
+            })
+            .fail((e) => console.error(e));
+        }
+        //Загружаем шаблон, отрисовываем
+        function renderPage(page) {
+          setActiveLink();
+          const pageLocation = page + '.html';
+          $.get(pageLocation)
+            .done((templ) => {
+              const template = $.templates(templ);
+              const html = template.render(info);
+              $('#app').html(html);
+            })
+            .fail((e) => console.error(e));
+        }
+        //Отменяем дефолтное поведение ссылок, маршрутизуем на нужную страницу
+        function navigate(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          const page = $(e.target).attr('href');
+          window.location.hash = page;
+        }
+
+        function setActiveLink() {
+          const linkHref = window.location.hash;
+          $(document).find('a').removeClass('active');
+          $(e.target).addClass('active');
+        }
+
+        //Вешаем обработчик на все внутренние ссылки
+        $('body').on('click', 'a[data-link="ajax"]', navigate);
+
+        //Псевдороутер
+        $(window).on('hashchange', () => {
+          const page = window.location.hash.replace('#', '');
+          renderPage(page);
+        });
+
+        //Хэлперы для правильной отрисовки данных в шаблоне
+        function dateFormat(val) {
+          const raw = new Date(val);
+          return raw.getDate() + '.' + raw.getDate() + '.' + raw.getFullYear();
+        }
+
+        function moneyFormat(val) {
+          return (+val).toLocaleString('ru-RU') + ' руб.';
+        }
+
+        $.views.helpers({ date: dateFormat, money: moneyFormat });
+
+        //Запуск всего приложения
+        init();
+      })();
+    </script>
+  </body>
+</html>

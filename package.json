@@ -1,0 +1,22 @@
+{
+  "name": "test-job",
+  "version": "1.0.0",
+  "description": "Тестовое задание",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel src/index.html"
+  },
+  "author": "Aleksandr Ivanov <a.ivanov.tmn@mail.ru>",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.3.1"
+  },
+  "staticFiles": {
+    "staticPath": [
+      "src/data",
+      "src/templates"
+    ],
+    "watcherGlob": "**"
+  }
+}
