@@ -15,7 +15,7 @@
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Контрагент</a>
+      <span class="navbar-brand col-sm-3 col-md-2 mr-0">Контрагент</span>
     </nav>
     <div class="container-fluid">
       <nav class="col-md-2 d-none d-md-block bg-light sidebar">
@@ -100,9 +100,9 @@
         }
 
         function setActiveLink() {
-          const linkHref = window.location.hash;
-          $(document).find('a').removeClass('active');
-          $(e.target).addClass('active');
+          const selector = 'a[href="' + window.location.hash + '"]';
+          $(document).find('a[data-link="ajax"]').removeClass('active');
+          $(document).find(selector).addClass('active');
         }
 
         //Вешаем обработчик на все внутренние ссылки
