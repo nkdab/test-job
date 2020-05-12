@@ -18,5 +18,9 @@
       "src/templates"
     ],
     "watcherGlob": "**"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "jsrender": "^1.0.6"
   }
 }
