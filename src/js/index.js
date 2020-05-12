@@ -25,6 +25,7 @@ function init() {
 }
 //Загружаем шаблон, отрисовываем
 function renderPage(page) {
+  if (!page) return;
   setActiveLink();
   const pageLocation = page + '.html';
   $.get(pageLocation)
