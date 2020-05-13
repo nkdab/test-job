@@ -27,6 +27,7 @@ $(document).ready(() => {
       })
       .fail((e) => console.error(e));
   }
+
   //Загружаем шаблон, отрисовываем
   function renderPage(page) {
     page = page || 'company-card';
@@ -40,9 +41,9 @@ $(document).ready(() => {
       })
       .fail((e) => console.error(e));
   }
+
   //Отменяем дефолтное поведение ссылок, маршрутизуем на нужную страницу
   function navigate(e) {
-    console.log('navigate!!');
     e.stopPropagation();
     e.preventDefault();
     const page = $(e.target).attr('href').replace('/', '');
@@ -59,7 +60,7 @@ $(document).ready(() => {
   //Вешаем обработчик на все ссылки с sidebar
   $('body').on('click', 'a[data-link="ajax"]', navigate);
 
-  //Ыключаем кнопки Назад Вперед в браузере
+  //Включаем кнопки «Назад Вперед» в браузере
   $(window).on('popstate', () => {
     const page = window.location.pathname.replace('/', '');
     renderPage(page);
@@ -75,7 +76,51 @@ $(document).ready(() => {
     return (+val).toLocaleString('ru-RU') + ' руб.';
   }
 
-  $.views.helpers({ date: dateFormat, money: moneyFormat });
+  $.views.helpers({date: dateFormat, money: moneyFormat});
+
+  //Собственные тэги
+  function renderTabLink(name) {
+    const group = this.tagCtx.props.group || null;
+    const temp = `
+      <a class="nav-item nav-link" 
+         id="tab-${name}-${group}-tab" data-toggle="tab" href="#tab-${name}-${group}" role="tab" 
+         aria-controls="tab-${name}" aria-selected="false">${this.tagCtx.render()}</a>`;
+    return temp;
+  }
+
+  function renderTabContent(name) {
+    const group = this.tagCtx.props.group || null;
+    const temp = `
+    <div aria-labelledby="tab-${name}-${group}-tab" class="tab-pane fade" id="tab-${name}-${group}" role="tabpanel">
+    ${this.tagCtx.render()}    
+    </div>`;
+    return temp;
+  }
+
+  function renderAccordionItem(name, title) {
+    const temp = `
+      <div class="card">
+        <div class="card-header" id="accordion-item-${name}">
+          <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-${name}" aria-expanded="false" aria-controls="collapseOne">
+              ${title}
+            </button>
+          </h2>
+        </div>
+        <div id="collapse-${name}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+            ${this.tagCtx.render()}
+          </div>
+        </div>
+      </div>`;
+    return temp;
+  }
+
+  $.views.tags({
+    TabLink: renderTabLink,
+    TabContent: renderTabContent,
+    AccordionItem: renderAccordionItem
+  });
 
   //Запуск всего приложения
   init();
