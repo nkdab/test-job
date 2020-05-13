@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header border-bottom">
+        <h1>Участие в судебных процессах</h1>
+      </div>
+      <div class="card-body">
+        <table class="table table-sm table-bordered">
+          <thead>
+          <tr>
+            <th scope="col" rowspan="2">Год</th>
+            <th scope ="colgroup" colspan="2">Истец</th>
+            <th scope="colgroup" colspan="2">Ответчик</th>
+            <th scope="col">Третье лицо</th>
+          </tr>
+          <tr>
+            <td>Дел</td>
+            <td>Сумма</td>
+            <td>Дел</td>
+            <td>Сумма</td>
+            <td>Дел</td>
+          </tr>
+          </thead>
+          <tbody>
+          {{for ArbitrationCases}}
+          <tr>
+            <td>{{:#data['@Year']}}</td>
+            <td>{{:Plaintiff['@CasesNumber']}}</td>
+            <td>{{:~money(Plaintiff['@Sum'])}}</td>
+            <td>{{:Defendant['@CasesNumber']}}</td>
+            <td>{{:~money(Defendant['@Sum'])}}</td>
+            <td>{{:ThirdOrOtherPerson['@CasesNumber']}}</td>
+          </tr>
+          {{/for}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
