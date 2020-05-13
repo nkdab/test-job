@@ -7,13 +7,17 @@
       <div class="card-body">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="tab-info-tab" data-toggle="tab" href="#tab-info" role="tab" aria-controls="tab-info" aria-selected="false">Общая информация</a>
-            <a class="nav-item nav-link" id="tab-board-of-directors-tab" data-toggle="tab" href="#tab-board-of-directors" role="tab" aria-controls="tab-board-of-directors" aria-selected="false">Совет директоров</a>
-            <a class="nav-item nav-link" id="tab-executive-body-tab" data-toggle="tab" href="#tab-executive-body" role="tab" aria-controls="tab-executive-body" aria-selected="true">Исполнительный орган</a>
+            <a aria-controls="tab-info" aria-selected="false" class="nav-item nav-link" data-toggle="tab" href="#tab-info"
+               id="tab-info-tab" role="tab">Общая информация</a>
+            <a aria-controls="tab-board-of-directors" aria-selected="false" class="nav-item nav-link"
+               data-toggle="tab" href="#tab-board-of-directors" id="tab-board-of-directors-tab" role="tab">Совет
+              директоров</a>
+            <a aria-controls="tab-executive-body" aria-selected="true" class="nav-item nav-link" data-toggle="tab"
+               href="#tab-executive-body" id="tab-executive-body-tab" role="tab">Исполнительный орган</a>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="tab-info" role="tabpanel" aria-labelledby="tab-info-tab">
+          <div aria-labelledby="tab-info-tab" class="tab-pane fade show active" id="tab-info" role="tabpanel">
             {{for StructureInfo}}
             <div class="row">
               <div class="col-md-6">Совладельцев согласно ФКЦБ</div>
@@ -53,15 +57,16 @@
             </div>
             {{/for}}
           </div>
-          <div class="tab-pane fade" id="tab-board-of-directors" role="tabpanel" aria-labelledby="tab-board-of-directors-tab">
+          <div aria-labelledby="tab-board-of-directors-tab" class="tab-pane fade" id="tab-board-of-directors"
+               role="tabpanel">
             <table class="table table-sm">
               <thead>
-                <tr>
-                  <th scope="col">Ф.И.О</th>
-                  <th scope="col">Год рождения</th>
-                  <th scope="col">Должность</th>
-                  <th scope="col">Доля в компании</th>
-                </tr>
+              <tr>
+                <th scope="col">Ф.И.О</th>
+                <th scope="col">Год рождения</th>
+                <th scope="col">Должность</th>
+                <th scope="col">Доля в компании</th>
+              </tr>
               </thead>
               <tbody>
               {{for BoardOfDirectors.Member}}
@@ -75,15 +80,15 @@
               </tbody>
             </table>
           </div>
-          <div class="tab-pane fade" id="tab-executive-body" role="tabpanel" aria-labelledby="tab-executive-body-tab">
+          <div aria-labelledby="tab-executive-body-tab" class="tab-pane fade" id="tab-executive-body" role="tabpanel">
             <table class="table table-sm">
               <thead>
-                <tr>
-                  <th scope="col">Ф.И.О</th>
-                  <th scope="col">Год рождения</th>
-                  <th scope="col">Должность</th>
-                  <th scope="col">Доля в компании</th>
-                </tr>
+              <tr>
+                <th scope="col">Ф.И.О</th>
+                <th scope="col">Год рождения</th>
+                <th scope="col">Должность</th>
+                <th scope="col">Доля в компании</th>
+              </tr>
               </thead>
               <tbody>
               {{for ExecutiveBody.Member}}
@@ -98,8 +103,8 @@
             </table>
           </div>
         </div>
-        </div>
       </div>
     </div>
   </div>
+</div>
 </div>

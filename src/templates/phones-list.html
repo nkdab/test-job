@@ -11,7 +11,7 @@
         {{for PhoneList sort="#data['@Status']"}}
         <div class="row">
           <div class="col-md-8">
-            {{:"+7" + #data['@Code'] + #data['@Number']}}
+            {{:~phone(#data['@Code'], #data['@Number'])}}
           </div>
           <div class="col-md-4">{{:#data['@Status']}}</div>
         </div>
@@ -23,7 +23,7 @@
         {{for FaxList sort="#data['@Status']"}}
         <div class="row">
           <div class="col-md-8">
-            {{:"+7" + #data['@Code'] + #data['@Number']}}
+            {{:~phone(#data['@Code'], #data['@Number'])}}
           </div>
           <div class="col-md-4">{{:#data['@Status']}}</div>
         </div>

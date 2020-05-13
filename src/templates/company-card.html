@@ -26,8 +26,11 @@
         <div class="row">
           <div class="col-md-4">Телефон</div>
           <div class="col-md-8">
-            {{for PhoneList}} {{if #data['@Status']}} {{:"+7 " + #data['@Code']
-            + " " + #data['@Number'] + ", "}} {{/if}} {{/for}}
+            {{for PhoneList}}
+              {{if #data['@Status']}}
+                {{:~phone(#data['@Code'], #data['@Number'])}} <br />
+              {{/if}}
+            {{/for}}
           </div>
         </div>
         {{if Email}}
@@ -121,6 +124,28 @@
             </div>
           </div>
         </div>
+        <div class="row border-top"><br /></div>
+        <div class="row"><h3 class="ml-3">Компании с похожими данными</h3></div>
+        {{for CompanyWithSameInfo}}
+        <div class="row">
+          <div class="col-md-6">
+            Компаний с тем же номером телефона {{:~phone(TelephoneCount['@PhoneCode'], TelephoneCount['@PhoneNumber'])}}
+          </div>
+          <div class="col-md-6">{{:TelephoneCount['#text']}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">Компаний с тем же адресом</div>
+          <div class="col-md-6">{{:AddressCount}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">Компаний с совпадающими данными руководителей (страна)</div>
+          <div class="col-md-6">{{:ManagerCountInCountry}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">Компаний с совпадающими данными руководителей (регион)</div>
+          <div class="col-md-6">{{:ManagerCountInRegion}}</div>
+        </div>
+        {{/for}}
       </div>
     </div>
   </div>

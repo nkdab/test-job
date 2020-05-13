@@ -5,7 +5,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/dashboard.css';
 
-$(document).ready(() => {
+$(() => {
   jsrender($);
 
   let info; // Храним полученные данные
@@ -76,7 +76,14 @@ $(document).ready(() => {
     return (+val).toLocaleString('ru-RU') + ' руб.';
   }
 
-  $.views.helpers({date: dateFormat, money: moneyFormat});
+  function phoneFormat(code, number) {
+    return `+7 ${code} ${number}`;
+  }
+
+  $.views.helpers({
+    date: dateFormat,
+    money: moneyFormat,
+    phone: phoneFormat});
 
   //Собственные тэги
   function renderTabLink(name) {
