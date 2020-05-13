@@ -1,10 +1,12 @@
-import jQuery from 'jquery';
+import './utils/jquery-import';
 import jsrender from 'jsrender';
-
-window.$ = window.jQuery = jQuery;
+import 'popper.js';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import '../css/dashboard.css';
 
 $(document).ready(() => {
-  jsrender();
+  jsrender($);
 
   let info; // Храним полученные данные
 
@@ -40,6 +42,7 @@ $(document).ready(() => {
   }
   //Отменяем дефолтное поведение ссылок, маршрутизуем на нужную страницу
   function navigate(e) {
+    console.log('navigate!!');
     e.stopPropagation();
     e.preventDefault();
     const page = $(e.target).attr('href').replace('/', '');
@@ -53,7 +56,7 @@ $(document).ready(() => {
     $(document).find(selector).addClass('active');
   }
 
-  //Вешаем обработчик на все внутренние ссылки
+  //Вешаем обработчик на все ссылки с sidebar
   $('body').on('click', 'a[data-link="ajax"]', navigate);
 
   //Ыключаем кнопки Назад Вперед в браузере
