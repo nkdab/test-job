@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header border-bottom">
+        <h4 class="card-title"><h1>Финансовые показатели</h1></h4>
+      </div>
+      <div class="card-body">
+        <div class="accordion" id="accordionExample">
+          {{for Finance.FinPeriod}}
+            {{AccordionItem #data['@PeriodName'] "Информация за "+#data['@PeriodName']+" год" }}
+            <h4>Начало периода {{:~date(#data['@DateBegin'])}}, окончание периода {{:~date(#data['@DateEnd'])}}</h4>
+              <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  {{TabLink "balance" group=#data['@PeriodName']}}
+                    Баланс
+                  {{/TabLink}}
+                  {{TabLink "report" group=#data['@PeriodName']}}
+                    Отчет о прибыли и убытках
+                  {{/TabLink}}
+                </div>
+              </nav>
+              <div class="tab-content" id="nav-tabContent">
+                {{TabContent "balance" group=#data['@PeriodName']}}
+                <table class="table table-sm">
+                  <thead>
+                  <tr>
+                    <th scope="col">Наименование</th>
+                    <th scope="col">Раздел</th>
+                    <th scope="col">Сумма</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {{for StringList}}
+                  {{if #data['@Form']==="Баланс"}}
+                  <tr>
+                    <th scope="row">{{:#data['@Name']}}</th>
+                    <td>{{:#data['@Section']}}</td>
+                    <td>{{:~money(#data['@Value'])}}</td>
+                  </tr>
+                  {{/if}}
+                  {{/for}}
+                  </tbody>
+                </table>
+                {{/TabContent}}
+                {{TabContent "report" group=#data['@PeriodName']}}
+                <table class="table table-sm">
+                  <thead>
+                  <tr>
+                    <th scope="col">Наименование</th>
+                    <th scope="col">Раздел</th>
+                    <th scope="col">Сумма</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {{for StringList}}
+                  {{if #data['@Form']==="Отчет о прибыли и убытках"}}
+                  <tr>
+                    <th scope="row">{{:#data['@Name']}}</th>
+                    <td>{{:#data['@Section']}}</td>
+                    <td>{{:~money(#data['@Value'])}}</td>
+                  </tr>
+                  {{/if}}
+                  {{/for}}
+                  </tbody>
+                </table>
+                {{/TabContent}}
+              </div>
+            {{/AccordionItem}}
+          {{/for}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header border-bottom">
+        <h1>Структура компании</h1>
+      </div>
+      <div class="card-body">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a aria-controls="tab-info" aria-selected="false" class="nav-item nav-link" data-toggle="tab" href="#tab-info"
+               id="tab-info-tab" role="tab">Общая информация</a>
+            <a aria-controls="tab-board-of-directors" aria-selected="false" class="nav-item nav-link"
+               data-toggle="tab" href="#tab-board-of-directors" id="tab-board-of-directors-tab" role="tab">Совет
+              директоров</a>
+            <a aria-controls="tab-executive-body" aria-selected="true" class="nav-item nav-link" data-toggle="tab"
+               href="#tab-executive-body" id="tab-executive-body-tab" role="tab">Исполнительный орган</a>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div aria-labelledby="tab-info-tab" class="tab-pane fade show active" id="tab-info" role="tabpanel">
+            {{for StructureInfo}}
+            <div class="row">
+              <div class="col-md-6">Совладельцев согласно ФКЦБ</div>
+              <div class="col-md-6">{{:CountCoownerFCSM}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Совладельцев согласно РОССТАТ</div>
+              <div class="col-md-6">{{:CountCoownerRosstat}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Совладельцев согласно ЕГРЮЛ</div>
+              <div class="col-md-6">{{:CountCoownerEGRUL}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Филиалов</div>
+              <div class="col-md-6">{{:CountBranch}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Филиалов согласно РОССТАТ</div>
+              <div class="col-md-6">{{:CountBranchRosstat}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Аффилированных компаний ФКЦБ</div>
+              <div class="col-md-6">{{:CountAffiliatedCompanyFCSM}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Аффилированных компаний РОССТАТ</div>
+              <div class="col-md-6">{{:CountAffiliatedCompanyRosstat}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Аффилированных компаний ЕГРЮЛ</div>
+              <div class="col-md-6">{{:CountAffiliatedCompanyEGRUL}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">Некоммерческих организаций</div>
+              <div class="col-md-6">{{:NonprofitOrganizationRosstat}}</div>
+            </div>
+            {{/for}}
+          </div>
+          <div aria-labelledby="tab-board-of-directors-tab" class="tab-pane fade" id="tab-board-of-directors"
+               role="tabpanel">
+            <table class="table table-sm">
+              <thead>
+              <tr>
+                <th scope="col">Ф.И.О</th>
+                <th scope="col">Год рождения</th>
+                <th scope="col">Должность</th>
+                <th scope="col">Доля в компании</th>
+              </tr>
+              </thead>
+              <tbody>
+              {{for BoardOfDirectors.Member}}
+              <tr>
+                <th scope="row">{{:Name}}</th>
+                <td>{{:BirthdayYear}}</td>
+                <td>{{:Position['@Name']}}</td>
+                <td>{{:SharePart}}</td>
+              </tr>
+              {{/for}}
+              </tbody>
+            </table>
+          </div>
+          <div aria-labelledby="tab-executive-body-tab" class="tab-pane fade" id="tab-executive-body" role="tabpanel">
+            <table class="table table-sm">
+              <thead>
+              <tr>
+                <th scope="col">Ф.И.О</th>
+                <th scope="col">Год рождения</th>
+                <th scope="col">Должность</th>
+                <th scope="col">Доля в компании</th>
+              </tr>
+              </thead>
+              <tbody>
+              {{for ExecutiveBody.Member}}
+              <tr>
+                <th scope="row">{{:Name}}</th>
+                <td>{{:BirthdayYear}}</td>
+                <td>{{:Position['@Name']}}</td>
+                <td>{{:SharePart}}</td>
+              </tr>
+              {{/for}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

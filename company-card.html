@@ -1,0 +1,152 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header border-bottom">
+        <h4 class="card-title"><h1>Карточка компании</h1></h4>
+        <p class="category">{{:ShortNameRus}}</p>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            Название компании
+          </div>
+          <div class="col-md-8">
+            {{:FullNameRus}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            Адрес (место нахождения)
+          </div>
+          <div class="col-md-8">
+            {{for LegalAddresses}} {{>Address['@PostCode'] + ' ' +
+            Address['@Address'] + ' '}} {{/for}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Телефон</div>
+          <div class="col-md-8">
+            {{for PhoneList}}
+              {{if #data['@Status']}}
+                {{:~phone(#data['@Code'], #data['@Number'])}} <br />
+              {{/if}}
+            {{/for}}
+          </div>
+        </div>
+        {{if Email}}
+        <div class="row">
+          <div class="col-md-4">E-mail</div>
+          <div class="col-md-8">
+            <a href="mailto://{{:Email}}">{{:Email}}</a>
+          </div>
+        </div>
+        {{/if}} {{if Www}}
+        <div class="row">
+          <div class="col-md-4">Web сайт</div>
+          <div class="col-md-8"><a href="http://{{:Www}}">{{:Www}}</a></div>
+        </div>
+        {{/if}}
+        <div class="row">
+          <div class="col-md-4">Дата регистрации</div>
+          <div class="col-md-8">{{:~date(DateFirstReg)}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">ОГРН</div>
+          <div class="col-md-8">{{:OGRN}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">ИНН</div>
+          <div class="col-md-8">{{:INN}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">ОКОПФ</div>
+          <div class="col-md-8">{{:OKOPF['@Name']}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Основной вид деятельнсти</div>
+          <div class="col-md-8">
+            {{for OKVEDList}} {{if #data['@IsMain']}} {{:#data['@Name']}}
+            {{/if}} {{/for}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Руководитель</div>
+          <div class="col-md-8">
+            {{for LeaderList sort="@ActualDate" end=1 reverse=true}}
+            {{:#data['@FIO'] + " " + #data['@Position']}} {{/for}}
+          </div>
+        </div>
+        <div class="row border-bottom"><br /></div>
+        <div class="row">
+          <div class="col-md-4">Размер компании</div>
+          <div class="col-md-8">{{:CompanySize['@Description']}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Персонал</div>
+          <div class="col-md-8">{{:WorkersRange}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Уставной капитал</div>
+          <div class="col-md-8">{{:~money(CharterCapital)}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Статус</div>
+          <div class="col-md-8">
+            {{if IsActing}} Действует {{:~date(Status['@Date'])}} {{else}} Не
+            действует {{:~date(Status['@Date'])}} {{/if}}
+          </div>
+        </div>
+        <div class="row border-top"><br /></div>
+        <div class="row">
+          <div class="col-md-4">
+            Индексы
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-4">
+                <b>ИДО</b>
+                {{for FailureScore}}
+                <br />{{:#data['@FailureScoreValue']}}
+                <br />{{:#data['@FailureScoreDesc']}} {{/for}}
+              </div>
+              <div class="col-md-4">
+                <b>ИПД</b>
+                {{for CreditRisk}}
+                <br />{{:#data['@CreditRiskValue']}}
+                <br />{{:#data['@CreditRiskDesc']}} {{/for}}
+              </div>
+              <div class="col-md-4">
+                <b>ИПД</b>
+                {{for PaymentIndex}}
+                <br />{{:#data['@PaymentIndexValue']}}
+                <br />{{:#data['@PaymentIndexDesc']}} {{/for}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row border-top"><br /></div>
+        <div class="row"><h3 class="ml-3">Компании с похожими данными</h3></div>
+        {{for CompanyWithSameInfo}}
+        <div class="row">
+          <div class="col-md-6">
+            Компаний с тем же номером телефона {{:~phone(TelephoneCount['@PhoneCode'], TelephoneCount['@PhoneNumber'])}}
+          </div>
+          <div class="col-md-6">{{:TelephoneCount['#text']}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">Компаний с тем же адресом</div>
+          <div class="col-md-6">{{:AddressCount}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">Компаний с совпадающими данными руководителей (страна)</div>
+          <div class="col-md-6">{{:ManagerCountInCountry}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">Компаний с совпадающими данными руководителей (регион)</div>
+          <div class="col-md-6">{{:ManagerCountInRegion}}</div>
+        </div>
+        {{/for}}
+      </div>
+    </div>
+  </div>
+</div>

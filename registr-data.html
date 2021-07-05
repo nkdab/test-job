@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header border-bottom">
+        <h1>Регистрационные данные</h1>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">Код Спарк</div>
+          <div class="col-md-8">{{:SparkID}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">ОГРН</div>
+          <div class="col-md-8">{{:OGRN}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">ИНН</div>
+          <div class="col-md-8">{{:INN}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">ОКПО</div>
+          <div class="col-md-8">{{:OKPO}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">ОКАТО</div>
+          <div class="col-md-8">{{:OKATO['@Code']}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">ОКФС</div>
+          <div class="col-md-8">
+            {{:OKFS['@Name'] + ' (' + OKFS['@Code'] + ')'}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">ОКОПФ</div>
+          <div class="col-md-8">
+            {{:OKOPF['@Name'] + ' (' + OKOPF['@Code'] + ')'}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">ОКОГУ</div>
+          <div class="col-md-8">
+            {{:OKOGU['@Name'] + ' (' + OKOGU['@Code'] + ')'}}
+          </div>
+        </div>
+        <div class="row border-top"><br /></div>
+        <div class="row">
+          <h3 class="ml-3">Сведения о государственной регистрации</h3>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Дата первичной регистрации</div>
+          <div class="col-md-8">{{:~(DateFirstReg)}}</div>
+        </div>
+        {{for FederalTaxRegistration}}
+        <div class="row">
+          <div class="col-md-4">Дата регистрации</div>
+          <div class="col-md-8">{{:~(RegDate)}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Регистрирующий орган</div>
+          <div class="col-md-8">{{:RegAuthority}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Адрес регистрирующего органа</div>
+          <div class="col-md-8">{{:RegAuthorityAddress}}</div>
+        </div>
+        {{/for}}
+      </div>
+    </div>
+  </div>
+</div>
