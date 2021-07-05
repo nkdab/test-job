@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html --public-url /test-job/"
   },
   "author": "Aleksandr Ivanov <a.ivanov.tmn@mail.ru>",
   "license": "ISC",
